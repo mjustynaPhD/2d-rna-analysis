@@ -1,0 +1,18 @@
+# find and copy dbns targets with pseudoknots (outputs path pseudoknots-bpseqs)
+python find_pk_sequences.py ../../dbn-cifs/
+
+# copy bpseqs to the same directory
+./copy_bpseq_targets.sh
+
+# leave pseudoknots only in bpseqs
+python leave_pseudoknots.py ../../pseudoknots-bpseqs/
+
+# Create structure of validation directory and copy targets
+./copy_pseudoknots_targets.sh
+
+cd ../validation
+# Filter and copy methods outputs. Update paths and scripts from validation dir:
+./filter_bpseq.sh
+
+# validation
+java -jar rna2dValidator-1.0-SNAPSHOT-jar-with-dependencies.jar /data/2d-rna/validation-pseudoknots/
