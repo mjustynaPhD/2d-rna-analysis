@@ -6,6 +6,7 @@
 # Vscode
 .vscode
 .ipynb_checkpoints
+external-files/
 
 # Node artifact files
 node_modules/
