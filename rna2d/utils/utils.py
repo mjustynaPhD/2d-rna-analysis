@@ -1,9 +1,9 @@
+
 import os
 import pandas as pd
 
 def get_results(out_path, res_path):
-    if not os.path.exists(out_path):
-        os.makedirs(out_path)
+    os.makedirs(out_path, exist_ok=True)
     with open(res_path) as f:
         results = f.readlines()
     return results
