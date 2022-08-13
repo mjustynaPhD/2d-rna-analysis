@@ -1,6 +1,12 @@
-
 import os
 import pandas as pd
+
+NAMES = {
+'spot-rna':'SPOT-RNA', 'mxfold2':'MXfold2', 'ufold':'UFold', 'contextFold':'Contextfold', 'ipknot':'IPknot', 'contrafold':'CONTRAfold',
+       'rnafold':'RNAFold', 'mxfold':'MXfold', 'rna-state-inf':'RNA State Inf.', 'rna-structure':'RNAStructure', 'e2efold':'E2efold'}
+
+def get_names():
+    return NAMES
 
 def get_results(out_path, res_path):
     os.makedirs(out_path, exist_ok=True)
