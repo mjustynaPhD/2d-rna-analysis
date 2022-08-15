@@ -1,9 +1,9 @@
 #!/bin/bash
 
 PREDS="/data/2d-rna/predictions-bpseqs"
-TARGETS="/data/2d-rna/validation-all-non0"
-OUTPUT="/data/2d-rna/validation-all-non0"
-method="ufold"
+TARGETS="/data/2d-rna/validation-noncanon"
+OUTPUT="/data/2d-rna/validation-noncanon"
+method="rnafold"
 
 for id in $PREDS/*;
 do
