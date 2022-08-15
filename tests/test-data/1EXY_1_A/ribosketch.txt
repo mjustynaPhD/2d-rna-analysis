@@ -1,0 +1,10 @@
+4 26 tHW
+5 26 tHW
+6 27 tSH
+9 22 tSH
+13 16 tSH
+20 23 cWH
+25 27 cSH
+26 28 tSW
+9 19 n/a
+32 33 n/a
