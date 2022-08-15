@@ -29,7 +29,7 @@ def make_bpseq_structure(sequence: str, lines: list, bpseq: dict, joined_ids: Di
     wobble_pairing = {'GU', 'UG'}
     for l in lines:
         lfields = [x.strip().upper() for x in l]
-        pair = get_pair_by_ids(tuple(lfields), sequence, joined_ids)
+        pair = get_pair_by_ids(lfields, sequence, joined_ids)
         if not wobble and pair in wobble_pairing:
             continue
         bpseq[joined_ids[lfields[0]]].append(joined_ids[lfields[1]])
@@ -39,10 +39,12 @@ def make_bpseq_structure(sequence: str, lines: list, bpseq: dict, joined_ids: Di
             v.append(0)
     return bpseq
 
-def get_pair_by_ids(pair:Tuple[str, str], seq:str, joined_ids:Dict[str, int])->str:
+
+def get_pair_by_ids(pair: List[str], seq: str, joined_ids: Dict[str, int]) -> str:
     b1 = seq[joined_ids[pair[0]]-1]
     b2 = seq[joined_ids[pair[1]]-1]
     return f'{b1}{b2}'
+
 
 def get_cif_sequence_ids(file):
     with open(file) as f:
@@ -133,7 +135,7 @@ def save_bpseq(path, bpseq, seq):
 
 
 def get_pairing_mode(csv):
-    return True if 'noncanonical.csv' in csv else False
+    return False if 'noncanonical.csv' in csv else True
 
 
 if __name__ == "__main__":
@@ -141,5 +143,5 @@ if __name__ == "__main__":
     fasta = sys.argv[2]
     cif = sys.argv[3]
     output_path = sys.argv[4]
-    noncanon = get_pairing_mode(csv)
-    conversion_pipeline(csv, fasta, cif, output_path, wobble=noncanon)
+    wobble = get_pairing_mode(csv)
+    conversion_pipeline(csv, fasta, cif, output_path, wobble=wobble)
