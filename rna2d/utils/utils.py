@@ -8,8 +8,7 @@ NAMES = {
 def get_names():
     return NAMES
 
-def get_results(out_path, res_path):
-    os.makedirs(out_path, exist_ok=True)
+def get_results(res_path):
     with open(res_path) as f:
         results = f.readlines()
     return results
@@ -93,6 +92,7 @@ def get_means_stds(met_res, indeces, out_path:str, cols:list=['PPV', 'TPR', 'F1'
     return means, stds, dfs
 
 def get_DataFrames(means, stds, out_path:str, name:str="all", cols:list = ['PPV', 'TPR', 'F1', 'INF']):
+    os.makedirs(out_path, exist_ok=True)
     df_means = pd.DataFrame(means.values(), columns=cols, index=means.keys())
     df_means = df_means.sort_values("INF", ascending=False)
     df_means.to_csv(os.path.join(out_path, name+"-means.csv"))
