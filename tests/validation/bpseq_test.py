@@ -34,7 +34,7 @@ def test_wobble_remove():
 def test_pairing_mode():
     noncanon = '/0/noncanonical.csv'
     canon = '/0/whole.csv'
-    nc = mb.get_pairing_mode(noncanon)
-    cn = mb.get_pairing_mode(canon)
-    assert nc == True
-    assert cn == False
+    nc_wobble = mb.get_pairing_mode(noncanon)
+    cn_wobble = mb.get_pairing_mode(canon)
+    assert nc_wobble == False
+    assert cn_wobble == True
