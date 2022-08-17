@@ -8,3 +8,5 @@ from .utils import get_DataFrames
 from .utils import get_names
 
 from .data_transformations import get_sns_data
+
+from .rfam import Rfam
