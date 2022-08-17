@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Dict
+from typing import Dict, List
 
 @dataclass
 class Rfam():
@@ -31,3 +31,12 @@ class Rfam():
             else:
                 print(k)
         return new_dict
+    
+    def filter_out_list(self, pdb_list:List, mapping:Dict[str, str]) -> Dict[str, str]:
+        new_d = {}
+        for m in mapping:
+            if m not in pdb_list:
+                new_d[m] = mapping[m]
+        return new_d
+        
+
