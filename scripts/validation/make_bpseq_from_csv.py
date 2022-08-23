@@ -28,7 +28,12 @@ def convert_to_bpseq(csv, fasta, cif, wobble: bool = True) -> Tuple[str, Dict[in
 def make_bpseq_structure(sequence: str, lines: list, bpseq: dict, joined_ids: Dict[str, int], wobble: bool = True) -> Dict[int, List]:
     wobble_pairing = {'GU', 'UG'}
     for l in lines:
-        lfields = [x.strip().upper() for x in l]
+        lfields = [x.strip() for x in l]
+        try:
+            lfields = residue_to_upper_case(lfields)
+        except ValueError as e:
+            print(lfields)
+            raise
         pair = get_pair_by_ids(lfields, sequence, joined_ids)
         if not wobble and pair in wobble_pairing:
             continue
@@ -38,6 +43,21 @@ def make_bpseq_structure(sequence: str, lines: list, bpseq: dict, joined_ids: Di
         if len(v) == 0:
             v.append(0)
     return bpseq
+
+
+def residue_to_upper_case(lfields):
+    # B.u1
+    c1, r1 = lfields[0].split('.')
+    c2, r2 = lfields[1].split('.')
+    # u-> upper()
+    # B.U1
+    def convert(r):
+        aa = r[0].upper()
+        rest = r[1:]
+        return aa, rest
+    aa1, rest1 = convert(r1)
+    aa2, rest2 = convert(r2)
+    return [f'{c1}.{aa1}{rest1}', f'{c2}.{aa2}{rest2}']
 
 
 def get_pair_by_ids(pair: List[str], seq: str, joined_ids: Dict[str, int]) -> str:
@@ -53,16 +73,16 @@ def get_cif_sequence_ids(file):
     header = get_cif_header(lines)
 
     res_name_field = header['auth_comp_id']
-    # res_id_field = header['auth_seq_id']
-    res_id_field = header['label_seq_id']
+    res_id_field = header['auth_seq_id']
+    # res_id_field = header['label_seq_id']
 
-    # res_asym_field = header['auth_asym_id']
-    res_asym_field = header['label_asym_id']
+    res_asym_field = header['auth_asym_id']
+    # res_asym_field = header['label_asym_id']
     pdb_ins_code_field = header['pdbx_PDB_ins_code']
     seq = []
     jids = {}
     counter = 1
-    last_res = -1
+    last_res = ""
     for l in lines:
         if l.strip().startswith("ATOM"):
             fields = l.split()
@@ -73,11 +93,11 @@ def get_cif_sequence_ids(file):
             joined_id = "".join(
                 [residue_asym, ".", residue_name, residue_id, pdb_ins_code])
 
-            if residue_id != last_res and residue_name.upper() in ['A', 'C', 'G', 'U']:
+            if joined_id != last_res and residue_name.upper() in ['A', 'C', 'G', 'U']:
                 seq.append(residue_name)
                 jids[joined_id] = counter
                 counter += 1
-                last_res = residue_id
+                last_res = joined_id
     return "".join(seq), jids
 
 
@@ -93,13 +113,16 @@ def get_pdb_ins_code(field):
 def get_cif_header(lines):
     header = {}
     lines = lines[3:]
+    index = 0
     for a in range(len(lines)):
         l = lines[a].strip()
-        name = l.replace("_atom_site.", "").strip()
+
         if l.startswith("ATOM"):
             return header
-        else:
-            header[name] = a
+        elif l.startswith("_atom_site."):
+            name = l.replace("_atom_site.", "").strip()
+            header[name] = index
+            index += 1
 
 
 def convert_residues(field):
@@ -116,7 +139,7 @@ def read_csv_lines(path):
     with open(path) as f:
         lines = f.readlines()
     lines = [l.split(";")[0] for l in lines[1:]]
-    lines = [l.split("-") for l in lines]
+    lines = [l.split(" - ") for l in lines]
     return lines
 
 

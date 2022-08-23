@@ -4,7 +4,7 @@ from typing import Dict, List
 @dataclass
 class Rfam():
 
-    def get_pdb_family_mapping(self, rfam_pdb_path:str)->Dict[str, str]:
+    def get_pdb_family_mapping(self, rfam_pdb_path:str, families:List=None)->Dict[str, str]:
         with open(rfam_pdb_path) as f:
             lines = f.readlines()
         pdb_mapping = [l.strip() for l in lines]
@@ -16,6 +16,8 @@ class Rfam():
             pdb_id = p[1]
             chain = p[2]
             full_id = f'{pdb_id.upper()}_{chain}'
+            if families is not None and family not in families:
+                continue
             pdbs_families[full_id] = family
         return pdbs_families
 
@@ -38,5 +40,12 @@ class Rfam():
             if m not in pdb_list:
                 new_d[m] = mapping[m]
         return new_d
+    
+    def get_families_ids(self, rfam_pdb_path:str):
+        with open(rfam_pdb_path) as f:
+            lines = f.readlines()
+        pdb_mapping = [l.strip() for l in lines]
+        pdb_mapping = [l.split('\t')[0] for l in pdb_mapping]
+        return pdb_mapping
         
 

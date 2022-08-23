@@ -6,8 +6,8 @@ ID
 import os
 import sys
 import shutil
-target_path="/data/2d-rna/predictions-bpseqs/"
-structure_path="/data/2d-rna/val-test/"
+target_path="/data/2d-rna/new-cifs/predictions-bpseqs/"
+structure_path="/data/2d-rna/new-cifs/val-test/"
 
 def create_structure(files, structure_path, name="Target"):
     names = [f[:4].upper() for f in files]

@@ -17,5 +17,5 @@ do
     out_name=${f/u.cif/-preprocessed.cif}
     out_name=${out_name/$DATA/$OUT}
     # echo $out_name
-    cat $f | scripts/preprocess-cif2.py > $out_name
+    cat $f | scripts/preprocess-cif.py > $out_name
 done

@@ -1,6 +1,39 @@
 import os
 import scripts.validation.make_bpseq_from_csv as mb
 
+def test_convert():
+    csv = "/data/2d-rna/new-cifs/rnapdbee-cifs//6XQE_1_2x/0/noncanonical.csv"
+    cif = "/data/2d-rna/new-cifs/cifs//6XQE_1_2x.cif"
+    fasta = "/data/2d-rna/new-cifs/fasta500//6XQE_1_2x.fa"
+    seq, bpseq = mb.convert_to_bpseq(csv, fasta, cif)
+    assert len(seq) > 0
+
+def test_convert2():
+    csv = "/data/2d-rna/new-cifs/rnapdbee-cifs/6NUO_1_RB/0/noncanonical.csv"
+    cif = "/data/2d-rna/new-cifs/cifs/6NUO_1_RB.cif"
+    fasta = "/data/2d-rna/new-cifs/fasta500/6NUO_1_RB.fa"
+    seq, bpseq = mb.convert_to_bpseq(csv, fasta, cif)
+    assert len(seq) > 0
+
+def test_convert3():
+    csv = "/data/2d-rna/new-cifs/rnapdbee-cifs//6O90_1_B/0/noncanonical.csv"
+    cif = "/data/2d-rna/new-cifs/cifs//6O90_1_B.cif"
+    fasta = "/data/2d-rna/new-cifs/fasta500//6O90_1_B.fa"
+    seq, bpseq = mb.convert_to_bpseq(csv, fasta, cif)
+    assert len(seq)
+
+def test_convert4():
+    csv = "/data/2d-rna/new-cifs/rnapdbee-cifs/6TPQ_1_V/0/noncanonical.csv"
+    cif = "/data/2d-rna/new-cifs/cifs/6TPQ_1_V.cif"
+    fasta = "/data/2d-rna/new-cifs/fasta500/6TPQ_1_V.fa"
+    seq, bpseq = mb.convert_to_bpseq(csv, fasta, cif)
+    assert len(seq)
+
+def test_get_file():
+    path = "/data/2d-rna/new-cifs/cifs/6NUO_1_RB.cif"
+    seq, jid = mb.get_cif_sequence_ids(path)
+    assert len(seq) == 120
+    assert len(jid) == 120
 
 def test_wobble_remove():
     path = os.path.join(os.getcwd(), "tests/test-data/")

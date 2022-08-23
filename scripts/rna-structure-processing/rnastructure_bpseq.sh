@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SRC="/data/2d-rna/predictions-rna-structure"
+SRC="/data/2d-rna/new-cifs/predictions-rna-structure"
 cd ~/2d-analysis/
 echo `pwd`
 for f in $SRC/*;
@@ -18,7 +18,7 @@ do
         # p=/data/2d-rna/predictions-bpseqs/$out/rna-structure
         # if [[ ! -d $p ]]
         # then
-        sudo docker-compose run --name rnastr2 --rm --entrypoint ./rnapdbee rnapdbee -i $dot -o /data/2d-rna/rna-structure-bpseqs/$out$type
+        sudo docker-compose run --name rnastr2 --rm --entrypoint ./rnapdbee rnapdbee -i $dot -o /data/2d-rna/new-cifs/rna-structure-bpseqs/$out$type
         # fi
 
     

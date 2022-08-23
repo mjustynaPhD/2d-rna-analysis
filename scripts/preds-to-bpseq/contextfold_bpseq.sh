@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SRC="/data/2d-rna/predictions-raw/contextFold"
+SRC="/data/2d-rna/new-cifs/predictions-raw/contextfold/"
 cd ~/2d-analysis/
 echo `pwd`
 for f in $SRC/*.pred;
@@ -10,7 +10,7 @@ do
     # out=${out^^}
     # echo $out
     # echo $f
-    p=/data/2d-rna/predictions-bpseqs/$out/contextFold
+    p=/data/2d-rna/new-cifs/predictions-bpseqs/$out/contextFold
     echo $p
 
     # if [[ ! -d $p ]]
@@ -20,7 +20,7 @@ do
     # fi
     if [[ ! -d $p ]]
     then
-        sudo docker-compose run --rm --entrypoint ./rnapdbee rnapdbee -i $f -o /data/2d-rna/predictions-bpseqs/$out/contextFold
+        sudo docker-compose run --rm --entrypoint ./rnapdbee rnapdbee -i $f -o /data/2d-rna/new-cifs/predictions-bpseqs/$out/contextFold
     fi
     
     # docker run rnapdbee:latest ./rnapdbee rnapdbee -i $f -o /data/2d-rna/predictions-bpseqs/$out/contextFold

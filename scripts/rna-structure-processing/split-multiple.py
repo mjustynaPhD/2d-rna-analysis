@@ -1,6 +1,6 @@
 import sys
 import os
-OUTPUT_PATH="/data/2d-rna/predictions-rna-structure/"
+OUTPUT_PATH="/data/2d-rna/new-cifs/predictions-rna-structure/"
 inp_file = sys.argv[1]
 
 with open(inp_file) as f:
