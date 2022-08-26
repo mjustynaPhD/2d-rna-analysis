@@ -1,6 +1,6 @@
 #!/bin/bash
 
-P="/data/2d-rna/predictions-raw/rna-structure"
+P="/data/2d-rna/new-cifs/predictions-raw/rnastructure"
 
 for f in $P/*.dot
 do

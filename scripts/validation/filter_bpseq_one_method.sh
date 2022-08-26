@@ -1,9 +1,9 @@
 #!/bin/bash
 
-PREDS="/data/2d-rna/predictions-bpseqs"
-TARGETS="/data/2d-rna/validation-all-non0"
-OUTPUT="/data/2d-rna/validation-all-non0"
-method="ufold"
+PREDS="/data/2d-rna/new-cifs/predictions-bpseqs"
+TARGETS="/data/2d-rna/new-cifs/validation-pseudoknots"
+OUTPUT="/data/2d-rna/new-cifs/validation-pseudoknots"
+method="e2efold"
 
 for id in $PREDS/*;
 do

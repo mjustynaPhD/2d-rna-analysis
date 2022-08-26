@@ -6,8 +6,8 @@ ID
 import os
 import sys
 import shutil
-target_path="/data/2d-rna/predictions-bpseqs/"
-structure_path="/data/2d-rna/val-test/"
+target_path="/data/2d-rna/new-cifs/predictions-bpseqs/"
+structure_path="/data/2d-rna/new-cifs/val-test/"
 
 def create_structure(files, structure_path, name="Target"):
     names = [f[:4].upper() for f in files]
@@ -40,6 +40,7 @@ def copy_methods(targets, src_path, dst_path):
 if __name__=="__main__":
     targets = os.listdir(target_path)
     targets = [t for t in targets if t.endswith('.bpseq')]
+    print(len(targets))
     create_structure(targets, structure_path, "Target")
     # copy_targets(targets, target_path, structure_path)
     copy_methods(targets, target_path, structure_path)

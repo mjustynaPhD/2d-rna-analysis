@@ -33,10 +33,10 @@ def save_bpseq(path, name, bpseq):
 # print(reference, control)
 ref_lines = read_bpseq(reference)
 ctrl_lines = read_bpseq(control)
-ref__ids = set([int(r.split()[0]) for r in ref_lines if r.split()[2].strip()!='0'])
+ref_ids = set([int(r.split()[0]) for r in ref_lines if r.split()[2].strip()!='0'])
 ctrl_ids = set([int(r.split()[0]) for r in ctrl_lines if r.split()[2].strip()!='0'])
 
-filtered = ref__ids.intersection(ctrl_ids)
+filtered = ref_ids.intersection(ctrl_ids)
 # print(filtered)
 bpseq = create_bpseq(ctrl_lines, filtered)
 bname = os.path.basename(control)

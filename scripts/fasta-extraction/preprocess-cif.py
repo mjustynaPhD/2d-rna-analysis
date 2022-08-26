@@ -1,7 +1,8 @@
 #! /usr/bin/env python
 import sys
 
-from pdbx import PdbxReader, PdbxWriter
+from pdbx.reader import PdbxReader
+from pdbx.writer import PdbxWriter
 
 
 def override_auth_with_label(container, categories):
