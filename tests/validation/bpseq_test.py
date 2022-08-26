@@ -29,6 +29,21 @@ def test_convert4():
     seq, bpseq = mb.convert_to_bpseq(csv, fasta, cif)
     assert len(seq)
 
+def test_convert5():
+    csv = "/data/2d-rna/rnapdbee-cifs/1AKX_1_A/0/noncanonical.csv"
+    cif = "/data/2d-rna/cifs/1AKX_1_A.cif"
+    fasta = "/data/2d-rna/fasta500/1AKX_1_A.fa"
+    seq, bpseq = mb.convert_to_bpseq(csv, fasta, cif)
+    assert len(seq)
+
+def test_convert6():
+    csv = "/data/2d-rna/rnapdbee-cifs/1DK1_1_B/0/noncanonical.csv"
+    cif = "/data/2d-rna/cifs/1DK1_1_B.cif"
+    fasta = "/data/2d-rna/fasta500/1DK1_1_B.fa"
+    seq, bpseq = mb.convert_to_bpseq(csv, fasta, cif)
+    assert len(seq)
+
+
 def test_get_file():
     path = "/data/2d-rna/new-cifs/cifs/6NUO_1_RB.cif"
     seq, jid = mb.get_cif_sequence_ids(path)

@@ -1,7 +1,7 @@
 
 import sys
 import os
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Union
 
 
 def conversion_pipeline(csv, fasta, cif, output_path, wobble: bool = True):
@@ -13,16 +13,25 @@ def conversion_pipeline(csv, fasta, cif, output_path, wobble: bool = True):
 def convert_to_bpseq(csv, fasta, cif, wobble: bool = True) -> Tuple[str, Dict[int, List]]:
     lines = read_csv_lines(csv)
     sequence = get_sequence(fasta).upper()
-    seq_cif, joined_ids = get_cif_sequence_ids(cif)
+    joined_ids, bpseq = get_residues_ids(csv, cif, sequence, label_seq_id=False)
+    try:
+        bpseq = make_bpseq_structure(
+            sequence, lines, bpseq, joined_ids, wobble)
+    except KeyError as e:
+        joined_ids, bpseq = get_residues_ids(csv, cif, sequence, label_seq_id=True)
+        bpseq = make_bpseq_structure(
+            sequence, lines, bpseq, joined_ids, wobble)
+
+    return sequence, bpseq
+
+def get_residues_ids(csv, cif, sequence, label_seq_id:bool):
+    seq_cif, joined_ids = get_cif_sequence_ids(cif, label_seq_id=label_seq_id)
     if seq_cif != sequence:
         print(csv, len(seq_cif), len(sequence))
     bpseq: Dict[int, List] = {}
     for a in range(len(sequence)):
         bpseq[a+1] = []
-
-    bpseq = make_bpseq_structure(sequence, lines, bpseq, joined_ids, wobble)
-
-    return sequence, bpseq
+    return joined_ids, bpseq
 
 
 def make_bpseq_structure(sequence: str, lines: list, bpseq: dict, joined_ids: Dict[str, int], wobble: bool = True) -> Dict[int, List]:
@@ -51,6 +60,7 @@ def residue_to_upper_case(lfields):
     c2, r2 = lfields[1].split('.')
     # u-> upper()
     # B.U1
+
     def convert(r):
         aa = r[0].upper()
         rest = r[1:]
@@ -66,18 +76,31 @@ def get_pair_by_ids(pair: List[str], seq: str, joined_ids: Dict[str, int]) -> st
     return f'{b1}{b2}'
 
 
-def get_cif_sequence_ids(file):
+def get_cif_sequence_ids(file: str, label_seq_id:bool=False) -> Tuple[str, Dict[str, int]]:
+    """
+    This function creates a dictionary of chains, residues and its ids.
+
+    Args:
+        file (str): Path to *.cif file
+        label_seq_id (bool): Indicates which seq id should be used. By default 'auth_seq_id' is used, however this sometimes raise exception, as some cif files are encoded in a different way. Then the 'label_seq_id' is used.
+
+    Returns:
+        Tuple[str, Dict[str, int]]: Sequence, Dictionary where the residue id is a key (e.g. 'A.U7') and value is the position in sequence( e.g. 7).
+    """
     with open(file) as f:
         lines = f.readlines()
 
     header = get_cif_header(lines)
 
     res_name_field = header['auth_comp_id']
-    res_id_field = header['auth_seq_id']
-    # res_id_field = header['label_seq_id']
+    if not label_seq_id:
+        res_id_field = header['auth_seq_id']
+        res_asym_field = header['auth_asym_id']
+    else:
+        res_id_field = header['label_seq_id']
+        res_asym_field = header['label_asym_id']
 
-    res_asym_field = header['auth_asym_id']
-    # res_asym_field = header['label_asym_id']
+    
     pdb_ins_code_field = header['pdbx_PDB_ins_code']
     seq = []
     jids = {}

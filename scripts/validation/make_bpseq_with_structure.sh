@@ -1,9 +1,9 @@
 #!/bin/bash
 
-CIF="/data/2d-rna/new-cifs/cifs"
-FASTA="/data/2d-rna/new-cifs/fasta500"
-CSV="/data/2d-rna/new-cifs/rnapdbee-cifs"
-OUTPUT="/data/2d-rna/new-cifs/validation-noncanon/"
+CIF="/data/2d-rna/cifs"
+FASTA="/data/2d-rna/fasta500"
+CSV="/data/2d-rna/rnapdbee-cifs"
+OUTPUT="/data/2d-rna/validation-noncanon/"
 
 for f in $FASTA/*.fa
 do
