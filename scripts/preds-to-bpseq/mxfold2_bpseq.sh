@@ -3,11 +3,11 @@
 SRC="/data/2d-rna/new-cifs/predictions-raw/mxfold2"
 cd ~/2d-analysis/
 echo `pwd`
-for f in $SRC/*.dbn;
+for f in $SRC/*.out;
 do
     
     out=${f/$SRC\/}
-    out=${out/.dbn/}
+    out=${out/.out/}
     # out=${out^^}
     echo $out
     # echo $f

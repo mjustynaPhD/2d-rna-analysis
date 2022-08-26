@@ -40,6 +40,7 @@ def copy_methods(targets, src_path, dst_path):
 if __name__=="__main__":
     targets = os.listdir(target_path)
     targets = [t for t in targets if t.endswith('.bpseq')]
+    print(len(targets))
     create_structure(targets, structure_path, "Target")
     # copy_targets(targets, target_path, structure_path)
     copy_methods(targets, target_path, structure_path)

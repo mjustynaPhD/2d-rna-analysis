@@ -4,7 +4,7 @@ import shutil
 from tqdm import tqdm
 
 input_path = sys.argv[1]
-output_path = "/data/2d-rna/pseudoknots-bpseqs/"
+output_path = "/data/2d-rna/new-cifs/pseudoknots-bpseqs/"
 print(input_path)
 
 files = os.listdir(input_path)

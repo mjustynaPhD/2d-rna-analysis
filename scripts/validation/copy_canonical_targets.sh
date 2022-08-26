@@ -2,7 +2,7 @@
 
 FASTA="/data/2d-rna/new-cifs/fasta500"
 CSV="/data/2d-rna/new-cifs/rnapdbee-cifs"
-OUTPUT="/data/2d-rna/new-cifs/validation-all/"
+OUTPUT="/data/2d-rna/new-cifs/validation-canon/"
 
 for f in $FASTA/*.fa
 do
