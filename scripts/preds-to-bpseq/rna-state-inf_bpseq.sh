@@ -15,6 +15,6 @@ do
     p=/data/2d-rna/new-cifs/predictions-bpseqs/$out/rna-state-inf
     if [[ ! -d $p ]]
     then
-        sudo docker-compose run --name rna-state --rm --entrypoint ./rnapdbee rnapdbee -i $f -o /data/2d-rna/new-cifs/predictions-bpseqs/$out/rna-state-inf
+        sudo docker-compose run --name rna-state --rm --entrypoint ./rnapdbee rnapdbee -i $f -o $p
     fi
 done

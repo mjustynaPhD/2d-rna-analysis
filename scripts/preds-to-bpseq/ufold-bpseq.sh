@@ -15,6 +15,6 @@ do
     # echo $f
     # if [[ ! -d $p ]]
     # then
-    sudo docker-compose run --name ufold --rm --entrypoint ./rnapdbee rnapdbee -i $f -o /data/2d-rna/predictions-bpseqs/$out/ufold
+    sudo docker-compose run --name ufold --rm --entrypoint ./rnapdbee rnapdbee -i $f -o $p
     # fi
 done

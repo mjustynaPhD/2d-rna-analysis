@@ -14,6 +14,6 @@ do
     p=/data/2d-rna/new-cifs/predictions-bpseqs/$out/e2efold
     if [[ ! -d $p ]]
     then
-        sudo docker-compose run --name e2efold --rm --entrypoint ./rnapdbee rnapdbee -i $f -o /data/2d-rna/predictions-bpseqs/new-cifs/$out/e2efold
+        sudo docker-compose run --name e2efold --rm --entrypoint ./rnapdbee rnapdbee -i $f -o $p
     fi
 done

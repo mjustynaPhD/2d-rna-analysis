@@ -20,7 +20,7 @@ do
     # fi
     if [[ ! -d $p ]]
     then
-        sudo docker-compose run --rm --entrypoint ./rnapdbee rnapdbee -i $f -o /data/2d-rna/new-cifs/predictions-bpseqs/$out/contextFold
+        sudo docker-compose run --rm --entrypoint ./rnapdbee rnapdbee -i $f -o $p
     fi
     
     # docker run rnapdbee:latest ./rnapdbee rnapdbee -i $f -o /data/2d-rna/predictions-bpseqs/$out/contextFold

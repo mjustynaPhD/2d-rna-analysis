@@ -14,6 +14,6 @@ do
     p=/data/2d-rna/new-cifs/predictions-bpseqs/$out/ipknot
     if [[ ! -d $p ]]
     then
-        sudo docker-compose run --name bee-ipknot --rm --entrypoint ./rnapdbee rnapdbee -i $f -o /data/2d-rna/new-cifs/predictions-bpseqs/$out/ipknot
+        sudo docker-compose run --name bee-ipknot --rm --entrypoint ./rnapdbee rnapdbee -i $f -o $p
     fi
 done
