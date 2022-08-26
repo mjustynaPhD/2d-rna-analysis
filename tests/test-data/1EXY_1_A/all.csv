@@ -1,0 +1,23 @@
+Base-pair;Interaction type;Canonical;Saenger;Leontis-Westhof;BPh;BR;Represented in dot-bracket
+A.g1 - A.C32;base - base;Y;XIX;cWW;UNKNOWN;UNKNOWN;N
+A.G2 - A.U31;base - base;Y;XXVIII;cWW;UNKNOWN;UNKNOWN;N
+A.G3 - A.C30;base - base;Y;XIX;cWW;UNKNOWN;UNKNOWN;N
+A.C4 - A.G29;base - base;Y;XIX;cWW;UNKNOWN;UNKNOWN;N
+A.G5 - A.C28;base - base;Y;XIX;cWW;UNKNOWN;UNKNOWN;N
+A.C6 - A.G25;base - base;Y;XIX;cWW;UNKNOWN;UNKNOWN;N
+A.C7 - A.G24;base - base;Y;XIX;cWW;UNKNOWN;UNKNOWN;N
+A.G8 - A.C23;base - base;Y;XIX;cWW;UNKNOWN;UNKNOWN;N
+A.G9 - A.C20;base - base;Y;XIX;cWW;UNKNOWN;UNKNOWN;N
+A.U10 - A.A19;base - base;Y;XX;cWW;UNKNOWN;UNKNOWN;N
+A.A11 - A.U18;base - base;Y;XX;cWW;UNKNOWN;UNKNOWN;N
+A.C12 - A.G17;base - base;Y;XIX;cWW;UNKNOWN;UNKNOWN;N
+A.C4 - A.U26;base - base;N;n/a;tHW;UNKNOWN;UNKNOWN;N
+A.G5 - A.U26;base - base;N;n/a;tHW;UNKNOWN;UNKNOWN;N
+A.C6 - A.A27;base - base;N;n/a;tSH;UNKNOWN;UNKNOWN;N
+A.G9 - A.A22;base - base;N;XI;tSH;UNKNOWN;UNKNOWN;N
+A.G13 - A.A16;base - base;N;XI;tSH;UNKNOWN;UNKNOWN;N
+A.C20 - A.C23;base - base;N;n/a;cWH;UNKNOWN;UNKNOWN;N
+A.G25 - A.A27;base - base;N;n/a;cSH;UNKNOWN;UNKNOWN;N
+A.U26 - A.C28;base - base;N;n/a;tSW;UNKNOWN;UNKNOWN;N
+A.G9 - A.A19;base - base (1H);N;n/a;n/a;UNKNOWN;UNKNOWN;N
+A.C32 - A.C33;base - base (1H);N;n/a;n/a;UNKNOWN;UNKNOWN;N

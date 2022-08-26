@@ -3,10 +3,12 @@
 # Learn more about .gitignore:
 #     https://www.atlassian.com/git/tutorials/saving-changes/gitignore
 
+notes.md
 # Vscode
 .vscode
 .ipynb_checkpoints
 external-files/
+
 
 # Node artifact files
 node_modules/

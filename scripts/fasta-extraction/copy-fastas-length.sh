@@ -1,14 +1,14 @@
 #!/bin/bash
 
-FASTA="/data/2d-rna/fasta-cifs"
+FASTA="/data/2d-rna/new-cifs/fasta-cifs"
 
 for f in $FASTA/*.fa
 do
     echo $f
     length=`tail -1 $f | wc -m`
-    if [[ "$length" -lt 1000 ]]
+    if [[ "$length" -lt 500 ]]
     then
-        cp $f /data/2d-rna/fasta1000/
+        cp $f /data/2d-rna/new-cifs/fasta500/
     fi
 
     # if [[ "$length" -lt 600 ]]

@@ -1,0 +1,12 @@
+Stem D1 A.1 A.5 gGGCG ((((( YRRYR A.28 A.32 CGCUC ))))) YRYYY
+Stem D2 A.6 A.8 CCG ((( YYR A.23 A.25 CGG ))) YRR
+Stem D3 A.9 A.12 GUAC (((( RYRY A.17 A.20 GUAC )))) RYRY
+
+Loop L1 A.5 A.6 GC (( RY A.25 A.28 GUAC )..) RYRY
+Loop L2 A.8 A.9 GG (( RR A.20 A.23 CGAC )..) YRRY
+Loop L3 A.12 A.17 CGCAAG (....) YRYRRR
+
+Single strand SS1 A.20 A.23 CGAC )..) YRRY
+Single strand SS2 A.25 A.28 GUAC )..) RYRY
+
+Single strand 3' SS3p A.32 A.33 CC ). YY

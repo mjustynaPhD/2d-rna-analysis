@@ -1,7 +1,7 @@
 #!/bin/bash
-INPUT="/data/2d-rna/rna-struct-validation/canon/"
-OUTPUT="/data/2d-rna/validation-canon/"
-NAMES=`cat best-canon.txt`
+INPUT="/data/2d-rna/new-cifs/rna-struct-validation/"
+OUTPUT="/data/2d-rna/new-cifs/validation-all/"
+NAMES=`cat best-new-cifs.txt`
 
 for f in $NAMES
 do
