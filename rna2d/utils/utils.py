@@ -1,4 +1,5 @@
 import os
+from typing import Dict
 import pandas as pd
 
 NAMES = {
@@ -6,7 +7,7 @@ NAMES = {
     'rnafold': 'RNAFold', 'mxfold': 'MXfold', 'rna-state-inf': 'RNA State Inf.', 'rna-structure': 'RNAStructure', 'e2efold': 'E2efold'}
 
 
-def get_names():
+def get_names() -> Dict[str, str]:
     return NAMES
 
 

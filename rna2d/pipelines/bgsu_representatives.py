@@ -12,8 +12,8 @@ class BGSURepresentatives():
         pdbs = [p.split(',')[1:2] for p in pdbs]
         pdbs = [self._combine_ids(p) for p in pdbs]
         pdbs = [p[0] for p in pdbs]
-        pdb_repres = [f'{p.split("_")[0]}_{p.split("_")[2]}' for p in pdbs]
-        return pdb_repres
+        # pdb_repres = [f'{p.split("_")[0]}_{p.split("_")[2]}' for p in pdbs]
+        return pdbs
 
     def _additional_chains(self, pdb:str) -> str:
         """Join pdb id if it contain additional chain.
