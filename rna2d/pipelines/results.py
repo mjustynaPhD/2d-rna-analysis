@@ -8,7 +8,7 @@ from rna2d.utils import *
 
 
 @dataclass
-class Pipeline():
+class Results():
     results_path: str
 
     def run_for_all(self) -> Tuple[Dict[str, List[float]], Dict[str, List[str]]]:
@@ -19,6 +19,16 @@ class Pipeline():
         return methods_results, indeces
 
     def filter_by_molecules(self, methods_results: Dict[str, List[float]], indeces: Dict[str, List[str]], filtering: Union[str, Path]) -> Tuple[Dict, Dict]:
+        """Filters results by list of molecules indicated in file.
+
+        Args:
+            methods_results (Dict[str, List[float]]): Results of each method.
+            indeces (Dict[str, List[str]]): Indeces for each method.
+            filtering (Union[str, Path]): Path to file with ids to filter out.
+
+        Returns:
+            Tuple[Dict, Dict]: Updated results and indeces with removed indeces from file.
+        """
         with open(filtering) as f:
             repres = f.readlines()
         repres = [r.strip() for r in repres]

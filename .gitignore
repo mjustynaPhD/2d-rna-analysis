@@ -8,6 +8,7 @@ notes.md
 .vscode
 .ipynb_checkpoints
 external-files/
+.coverage
 
 
 # Node artifact files
