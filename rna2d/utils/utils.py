@@ -1,12 +1,31 @@
 import os
+from typing import Dict
 import pandas as pd
 
 NAMES = {
-    'spot-rna': 'SPOT-RNA', 'mxfold2': 'MXfold2', 'ufold': 'UFold', 'contextFold': 'Contextfold', 'ipknot': 'IPknot', 'contrafold': 'CONTRAfold',
-    'rnafold': 'RNAFold', 'mxfold': 'MXfold', 'rna-state-inf': 'RNA State Inf.', 'rna-structure': 'RNAStructure', 'e2efold': 'E2efold'}
+    'spot-rna': 'SPOT-RNA',
+    'mxfold2': 'MXfold2',
+    'ufold': 'UFold',
+    'contextFold': 'Contextfold',
+    'ipknot': 'IPknot',
+    'contrafold': 'CONTRAfold',
+    'rnafold': 'RNAFold',
+    'mxfold': 'MXfold',
+    'rna-state-inf': 'RNA State Inf.',
+    'rna-structure': 'RNAStructure',
+    'e2efold': 'E2efold'
+    }
 
 
-def get_names():
+def get_pdb_ids(path):
+    pdbs = os.listdir(path)
+    pdbs = [p.replace("-", "_") for p in pdbs]
+    pdbs = [f'{p[:4].upper()}{p[4:]}' for p in pdbs]
+    pdbs = [f'{p.split("_")[0]}_{p.split("_")[2]}' for p in pdbs]
+    return pdbs
+
+
+def get_names() -> Dict[str, str]:
     return NAMES
 
 
@@ -20,8 +39,8 @@ def get_subset_ids(results):
     subset_ids = {}
     k = ""
     counter = 0
-    for l in results:
-        l = l.split()
+    for line in results:
+        l = line.split()
         if len(l) == 0:
             break
         elif len(l) == 1:
@@ -76,6 +95,10 @@ def join_results(subset_ids, pdb_id_res):
             met_res[method] = []
             indeces[method] = []
         for k_id in pdb_id_res.keys():
+            if method not in pdb_id_res[k_id]:
+                print(
+                    f"Results missing for method: {method} for molecule: {k_id}")
+                continue
             met_res[method].append(pdb_id_res[k_id][method])
             indeces[method].append(k_id)
     return met_res, indeces
