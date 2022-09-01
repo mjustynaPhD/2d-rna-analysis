@@ -21,7 +21,7 @@ class Rfam():
             pdbs_families[full_id] = family
         return pdbs_families
 
-    def get_new_keys_only(self, old:Dict[str,str], new:Dict[str,str])->Dict[str, str]:
+    def get_new_keys_only(self, old: Dict[str, str], new: Dict[str, str]) -> Dict[str, str]:
         old_keys = set(old.keys())
         new_keys = set(new.keys())
         key_difference = new_keys.difference(old_keys)

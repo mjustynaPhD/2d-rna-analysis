@@ -5,7 +5,7 @@ from typing import List, Union
 
 class BGSURepresentatives():
     
-    def extract_representatives(self, path:Union[str, PathLike]) -> List:
+    def extract_representatives(self, path: Union[str, PathLike]) -> List:
         with open(path) as f:
             lines = f.readlines()
         pdbs = [l.strip() for l in lines]
