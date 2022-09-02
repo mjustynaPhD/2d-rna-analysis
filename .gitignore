@@ -4,6 +4,7 @@
 #     https://www.atlassian.com/git/tutorials/saving-changes/gitignore
 
 notes.md
+notes.md
 # Vscode
 .vscode
 .ipynb_checkpoints
