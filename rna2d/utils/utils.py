@@ -1,5 +1,5 @@
 import os
-from typing import Dict
+from typing import Any, Dict, List, Tuple
 import pandas as pd
 
 NAMES = {
@@ -104,26 +104,41 @@ def join_results(subset_ids, pdb_id_res):
     return met_res, indeces
 
 
-def get_means_stds(met_res, indeces, out_path: str = None, cols: list = ['PPV', 'TPR', 'F1', 'INF']):
+def get_means_stds(
+    met_res,
+    indeces,
+    out_path: str = None,
+    cols: list = ['PPV', 'TPR', 'F1', 'INF'],
+    names: bool = False
+) -> Tuple[Dict[Any, Any], Dict[Any, Any], Dict[Any, Any]]:
     dfs = {}
     means = {}
     stds = {}
-    for m, vals in met_res.items():
-        df = pd.DataFrame(vals, columns=cols, index=indeces[m])
+    for name, vals in met_res.items():
+        if names:
+            tag_name = get_names()[name]
+        else:
+            tag_name = name
+        df = pd.DataFrame(vals, columns=cols, index=indeces[name])
         if out_path is not None:
             os.makedirs(out_path, exist_ok=True)
-            df.to_csv(os.path.join(out_path, m+".csv"))
-        dfs[m] = df
+            df.to_csv(os.path.join(out_path, name+".csv"))
+        dfs[tag_name] = df
         res = df.mean().to_list()
         res = [round(r, 2) for r in res]
         res_std = df.std().to_list()
         res_std = [round(r, 2) for r in res_std]
-        means[m] = res
-        stds[m] = res_std
+        means[tag_name] = res
+        stds[tag_name] = res_std
     return means, stds, dfs
 
 
-def get_DataFrames(means, stds, out_path: str = None, name: str = "all", cols: list = ['PPV', 'TPR', 'F1', 'INF']):
+def get_DataFrames(
+    means, stds,
+    out_path: str = None,
+    name: str = "all",
+    cols: List[str] = ['PPV', 'TPR', 'F1', 'INF']
+) -> Tuple[pd.DataFrame, pd.DataFrame]:
     df_means = pd.DataFrame(means.values(), columns=cols, index=means.keys())
     df_means = df_means.sort_values("INF", ascending=False)
 
