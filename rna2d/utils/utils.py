@@ -39,8 +39,8 @@ def get_subset_ids(results):
     subset_ids = {}
     k = ""
     counter = 0
-    for line in results:
-        l = line.split()
+    for lineine in results:
+        l = lineine.split()
         if len(l) == 0:
             break
         elif len(l) == 1:

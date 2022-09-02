@@ -46,3 +46,4 @@ class BGSURepresentatives():
         pdbs = [p.replace("\"", "").replace("\'", "") for p in pdb_line]
         pdbs = [self._additional_chains(p) for p in pdbs]
         return pdbs
+        
