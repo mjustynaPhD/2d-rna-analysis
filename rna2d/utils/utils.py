@@ -97,7 +97,9 @@ def join_results(subset_ids, pdb_id_res):
         for k_id in pdb_id_res.keys():
             if method not in pdb_id_res[k_id]:
                 print(
-                    f"Results missing for method: {method} for molecule: {k_id}")
+                    f"Results missing for method: {method} for molecule:\
+                        {k_id}"
+                )
                 continue
             met_res[method].append(pdb_id_res[k_id][method])
             indeces[method].append(k_id)
@@ -109,16 +111,21 @@ def get_means_stds(
     indeces,
     out_path: str = None,
     cols: list = ['PPV', 'TPR', 'F1', 'INF'],
-    names: bool = False
+    names: bool = False,
+    selected_methods: List[str] = None
 ) -> Tuple[Dict[Any, Any], Dict[Any, Any], Dict[Any, Any]]:
     dfs = {}
     means = {}
     stds = {}
+    if selected_methods is None:
+        selected_methods = met_res.keys()
     for name, vals in met_res.items():
         if names:
             tag_name = get_names()[name]
         else:
             tag_name = name
+        if name not in selected_methods and tag_name not in selected_methods:
+            continue
         df = pd.DataFrame(vals, columns=cols, index=indeces[name])
         if out_path is not None:
             os.makedirs(out_path, exist_ok=True)
