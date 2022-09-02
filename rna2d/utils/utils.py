@@ -111,6 +111,7 @@ def get_means_stds(met_res, indeces, out_path: str = None, cols: list = ['PPV', 
     for m, vals in met_res.items():
         df = pd.DataFrame(vals, columns=cols, index=indeces[m])
         if out_path is not None:
+            os.makedirs(out_path, exist_ok=True)
             df.to_csv(os.path.join(out_path, m+".csv"))
         dfs[m] = df
         res = df.mean().to_list()
