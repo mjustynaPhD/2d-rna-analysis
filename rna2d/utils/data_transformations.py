@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 
 
-def get_sns_data(dfs, df_means, names: dict, order:list = None) -> pd.DataFrame:
+def get_sns_data(dfs, df_means, names:dict, order:list = None, colors_dict:dict = {}) -> pd.DataFrame:
     mcc_dfs = {}
     if order is None:
         order = sorted(dfs.keys())
@@ -18,11 +18,14 @@ def get_sns_data(dfs, df_means, names: dict, order:list = None) -> pd.DataFrame:
     m = []
     inf = []
     means:List[float] = []
+    colors = []
     if order is None:
         order = df_means.index
+    
     for met in order:
         inf.extend(x[met].values)
         m.extend(np.full(len(x[met].values), names[met]))
         means.extend(np.full(len(x[met].values), str(round(x[met].mean(), 2))))
-    sns_df = pd.DataFrame({"Method": m, "INF": inf, 'Means': means})
+        colors.extend(np.full(len(x[met].values), colors_dict.get(met, 0)))
+    sns_df = pd.DataFrame({"Method": m, "INF": inf, 'Means': means, 'Color': colors})
     return sns_df
