@@ -11,7 +11,7 @@ NAMES = {
     'contrafold': 'CONTRAfold',
     'rnafold': 'RNAFold',
     'mxfold': 'MXfold',
-    'rna-state-inf': 'RNA State Inf.',
+    'rna-state-inf': 'RNA-state-inf',
     'rna-structure': 'RNAStructure',
     'e2efold': 'E2efold'
     }
@@ -156,3 +156,23 @@ def get_DataFrames(
         df_means.to_csv(os.path.join(out_path, name+"-means.csv"))
         df_std.to_csv(os.path.join(out_path, name+"-stds.csv"))
     return df_means, df_std
+
+
+def get_single_representative(all_indeces:list, pk_indeces:list, novel_keys:list, mapping:dict):
+    import numpy as np
+    np.random.seed(0)
+    l = {}
+    np.random.shuffle(pk_indeces)
+    for i in pk_indeces:
+        v =  mapping.get(i, 0)
+        if v not in l and i in novel_keys:
+            l[v] = i
+
+    np.random.shuffle(all_indeces)
+    for i in all_indeces:
+        v =  mapping.get(i, 0)
+        
+        if v not in l and i in novel_keys:
+            l[v] = i
+    return list(l.values())
+    # return l
