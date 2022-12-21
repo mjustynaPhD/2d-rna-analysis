@@ -147,10 +147,8 @@ def get_DataFrames(
     cols: List[str] = ['PPV', 'TPR', 'F1', 'INF']
 ) -> Tuple[pd.DataFrame, pd.DataFrame]:
     df_means = pd.DataFrame(means.values(), columns=cols, index=means.keys())
-    df_means = df_means.sort_values("INF", ascending=False)
 
     df_std = pd.DataFrame(stds.values(), columns=cols, index=df_means.index)
-    # df_std = df_std.sort_values(df_means['INF-MCC'], ascending=False)
     if out_path is not None:
         os.makedirs(out_path, exist_ok=True)
         df_means.to_csv(os.path.join(out_path, name+"-means.csv"))
