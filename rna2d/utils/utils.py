@@ -1,5 +1,7 @@
 import os
 from typing import Any, Dict, List, Tuple
+
+import numpy as np
 import pandas as pd
 
 NAMES = {
@@ -156,9 +158,26 @@ def get_DataFrames(
     return df_means, df_std
 
 
-def get_single_representative(all_indeces:list, pk_indeces:list, novel_keys:list, mapping:dict):
-    import numpy as np
-    np.random.seed(0)
+def get_single_representative(
+        all_indeces:list,
+        pk_indeces:list,
+        novel_keys:list,
+        mapping:dict,
+        seed:int=0
+    ) -> list:
+    """Generate a single random representative for each family.
+
+    Args:
+        all_indeces (list): List of PDB ids for type all.
+        pk_indeces (list): List of PDB ids for type pseudoknot.
+        novel_keys (list): List of novel families ids.
+        mapping (dict): Mapping of PDB ids to family ids.
+        seed (int, optional): Seed for random state. Defaults to 0.
+
+    Returns:
+        list: list of PDB ids considered as representatives.
+    """
+    np.random.seed(seed)
     l = {}
     np.random.shuffle(pk_indeces)
     for i in pk_indeces:
