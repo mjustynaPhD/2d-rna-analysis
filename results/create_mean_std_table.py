@@ -39,6 +39,7 @@ def read_values(means: str, stds: str):
     with open(stds) as f:
         s = f.readlines()
     vals = {}
+
     for a, b in zip(m[1:], s[1:]):
         a_s = a.strip().split(",")
         b_s = b.strip().split(",")
