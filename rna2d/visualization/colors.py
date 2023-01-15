@@ -8,14 +8,14 @@ def get_type_colors():
     Dict: colors assigned to the method
     """
     colors = {
-        'contextFold': 0,
-        'contrafold': 0,
-        'mxfold': 0,
-        'e2efold': 1,
-        'mxfold2': 1,
-        'rna-state-inf': 1,
-        'spot-rna': 1,
-        'ufold': 1,
+        'contextFold': 1,
+        'contrafold': 1,
+        'mxfold': 1,
+        'e2efold': 0,
+        'mxfold2': 0,
+        'rna-state-inf': 0,
+        'spot-rna': 0,
+        'ufold': 0,
         'ipknot': 2,
         'rnafold': 2,
         'rna-structure': 2
