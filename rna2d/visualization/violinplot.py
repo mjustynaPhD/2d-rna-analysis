@@ -13,6 +13,9 @@ class Violinplot():
 
     def plot(self, sns_df:pd.DataFrame, axs:plt.axis, panel_id: str, title:str, y_left:bool=True, x_axis:bool=True):
         ax = sns.violinplot(x='INF', y='Method', inner=None, hue='Color', data=sns_df, ax=axs, cut=0, palette='colorblind')
+        # sns set plot values range
+        ax.set_xlim(0, 1)
+        
         ax.set(title=title)
         ax.set_ylabel("")
         if not y_left:
