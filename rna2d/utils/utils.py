@@ -1,5 +1,7 @@
 import os
 from typing import Any, Dict, List, Tuple
+
+import numpy as np
 import pandas as pd
 
 NAMES = {
@@ -11,7 +13,7 @@ NAMES = {
     'contrafold': 'CONTRAfold',
     'rnafold': 'RNAFold',
     'mxfold': 'MXfold',
-    'rna-state-inf': 'RNA State Inf.',
+    'rna-state-inf': 'RNA-state-inf',
     'rna-structure': 'RNAStructure',
     'e2efold': 'E2efold'
     }
@@ -147,12 +149,47 @@ def get_DataFrames(
     cols: List[str] = ['PPV', 'TPR', 'F1', 'INF']
 ) -> Tuple[pd.DataFrame, pd.DataFrame]:
     df_means = pd.DataFrame(means.values(), columns=cols, index=means.keys())
-    df_means = df_means.sort_values("INF", ascending=False)
 
     df_std = pd.DataFrame(stds.values(), columns=cols, index=df_means.index)
-    # df_std = df_std.sort_values(df_means['INF-MCC'], ascending=False)
     if out_path is not None:
         os.makedirs(out_path, exist_ok=True)
         df_means.to_csv(os.path.join(out_path, name+"-means.csv"))
         df_std.to_csv(os.path.join(out_path, name+"-stds.csv"))
     return df_means, df_std
+
+
+def get_single_representative(
+        all_indeces:list,
+        pk_indeces:list,
+        novel_keys:list,
+        mapping:dict,
+        seed:int=0
+    ) -> list:
+    """Generate a single random representative for each family.
+
+    Args:
+        all_indeces (list): List of PDB ids for type all.
+        pk_indeces (list): List of PDB ids for type pseudoknot.
+        novel_keys (list): List of novel families ids.
+        mapping (dict): Mapping of PDB ids to family ids.
+        seed (int, optional): Seed for random state. Defaults to 0.
+
+    Returns:
+        list: list of PDB ids considered as representatives.
+    """
+    np.random.seed(seed)
+    l = {}
+    np.random.shuffle(pk_indeces)
+    for i in pk_indeces:
+        v =  mapping.get(i, 0)
+        if v not in l and i in novel_keys:
+            l[v] = i
+
+    np.random.shuffle(all_indeces)
+    for i in all_indeces:
+        v =  mapping.get(i, 0)
+        
+        if v not in l and i in novel_keys:
+            l[v] = i
+    return list(l.values())
+    # return l
