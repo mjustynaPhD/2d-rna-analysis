@@ -7,6 +7,7 @@ import pandas as pd
 NAMES = {
     'spot-rna': 'SPOT-RNA',
     'mxfold2': 'MXfold2',
+    'spot-rna2': "SPOT-RNA2",
     'ufold': 'UFold',
     'contextFold': 'Contextfold',
     'ipknot': 'IPknot',
@@ -15,7 +16,8 @@ NAMES = {
     'mxfold': 'MXfold',
     'rna-state-inf': 'RNA-state-inf',
     'rna-structure': 'RNAStructure',
-    'e2efold': 'E2efold'
+    'e2efold': 'E2efold',
+    'rnaalifold': 'RNAalifold',
     }
 
 
@@ -37,7 +39,7 @@ def get_results(res_path):
     return results
 
 
-def get_subset_ids(results):
+def get_subset_ids(results, ignored_methods: list = None):
     subset_ids = {}
     k = ""
     counter = 0
@@ -51,9 +53,11 @@ def get_subset_ids(results):
             method = l[0]
             res = l[1:]
             res = [float(r) for r in res]
-            if method not in subset_ids:
+            if method not in subset_ids and method not in ignored_methods:
                 subset_ids[method] = []
-            subset_ids[method].append(k)
+            elif method not in ignored_methods:
+                subset_ids[method].append(k)
+
         counter += 1
     return subset_ids
 

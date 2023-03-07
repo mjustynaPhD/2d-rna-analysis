@@ -11,9 +11,10 @@ class RfamNew():
     rfam_old: str
     rfam_new: str
     tool: str = "spot-rna"
+    ignored_methods: List[str] = None
 
     def get_newest_only(self, filter: List[str] = None):
-        p = Results(self.results_path)
+        p = Results(self.results_path, self.ignored_methods)
         methods, indeces = p.run_for_all()
         converted_indeces = [
             f'{p.split("_")[0]}_{p.split("_")[2]}' for p in indeces[self.tool]]
@@ -26,6 +27,8 @@ class RfamNew():
         res = {}
         conv_ind = {}
         for k in get_names():
+            if k in self.ignored_methods:
+                continue
             converted_indeces = [
                 f'{p.split("_")[0]}_{p.split("_")[2]}' for p in indeces[k]]
             df = pd.DataFrame(methods[k], columns=[

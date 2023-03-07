@@ -15,9 +15,11 @@ def get_type_colors():
         'mxfold2': 0,
         'rna-state-inf': 0,
         'spot-rna': 0,
+        'spot-rna2': 0,
         'ufold': 0,
         'ipknot': 2,
         'rnafold': 2,
+        'rnaalifold': 2,
         'rna-structure': 2
     }
     return colors
