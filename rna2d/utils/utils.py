@@ -39,7 +39,7 @@ def get_results(res_path):
     return results
 
 
-def get_subset_ids(results, ignored_methods: list = None):
+def get_subset_ids(results, ignored_methods: list = []):
     subset_ids = {}
     k = ""
     counter = 0
