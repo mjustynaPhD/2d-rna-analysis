@@ -19,6 +19,7 @@ NAMES = {
     'e2efold': 'E2efold',
     'rnaalifold': 'RNAalifold',
     'rscape': 'R-scape',
+    'turbofold': 'TurboFold II',
     }
 
 
@@ -184,13 +185,13 @@ def get_single_representative(
     """
     np.random.seed(seed)
     l = {}
-    np.random.shuffle(pk_indeces)
+    np.random.shuffle(sorted(pk_indeces))
     for i in pk_indeces:
         v =  mapping.get(i, 0)
         if v not in l and i in novel_keys:
             l[v] = i
 
-    np.random.shuffle(all_indeces)
+    np.random.shuffle(sorted(all_indeces))
     for i in all_indeces:
         v =  mapping.get(i, 0)
         

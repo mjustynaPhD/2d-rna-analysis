@@ -22,5 +22,6 @@ def get_type_colors():
         'rnaalifold': 2,
         'rna-structure': 2,
         'rscape':2,
+        'turbofold': 2,
     }
     return colors
