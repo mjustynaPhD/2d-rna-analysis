@@ -11,7 +11,7 @@ class Violinplot():
     style:str = "whitegrid"
     sns.set_theme(style=style)
 
-    def plot(self, sns_df:pd.DataFrame, axs:plt.axis, panel_id: str, title:str, y_left:bool=True, x_axis:bool=True):
+    def plot(self, sns_df:pd.DataFrame, axs:plt.axis, panel_id: str, title:str, y_left:bool=True, x_axis:bool=True, order:list=None):
         # set custom color palette
         order = sns_df.groupby(['Method', 'Color']).count().sort_values(by=['Color', "Method"], ascending=[True, True]).index
         custom_palette = [sns.color_palette("colorblind", 3)[c] for m, c in order]

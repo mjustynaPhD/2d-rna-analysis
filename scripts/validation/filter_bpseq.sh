@@ -1,8 +1,8 @@
 #!/bin/bash
 
-PREDS="/data/2d-rna/new-cifs/predictions-bpseqs"
-TARGETS="/data/2d-rna/new-cifs/validation-stack"
-OUTPUT="/data/2d-rna/new-cifs/validation-stack"
+PREDS="/data/2d-rna/tmp/preds_pdbee"
+TARGETS="/data/2d-rna/validation-msa"
+OUTPUT="/data/2d-rna/validation-msa"
 
 for id in $PREDS/*;
 do

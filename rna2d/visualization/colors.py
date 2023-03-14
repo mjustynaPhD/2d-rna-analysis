@@ -20,6 +20,7 @@ def get_type_colors():
         'ipknot': 2,
         'rnafold': 2,
         'rnaalifold': 2,
-        'rna-structure': 2
+        'rna-structure': 2,
+        'rscape':2,
     }
     return colors

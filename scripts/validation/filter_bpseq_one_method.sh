@@ -1,8 +1,8 @@
 #!/bin/bash
 
 PREDS="/data/2d-rna/new-cifs/predictions-bpseqs/"
-TARGETS="/data/2d-rna/validation-pseudoknots"
-OUTPUT="/data/2d-rna/validation-pseudoknots"
+TARGETS="/data/2d-rna/new-cifs/validation-pseudoknots"
+OUTPUT="/data/2d-rna/new-cifs/validation-pseudoknots"
 method="spot-rna2"
 
 for id in $PREDS/*;

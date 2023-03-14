@@ -18,6 +18,7 @@ NAMES = {
     'rna-structure': 'RNAStructure',
     'e2efold': 'E2efold',
     'rnaalifold': 'RNAalifold',
+    'rscape': 'R-scape',
     }
 
 
