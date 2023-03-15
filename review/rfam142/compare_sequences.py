@@ -13,10 +13,14 @@ def compare(f1, f2):
     print(f1, f2)
     o = os.popen(f"java -cp {neobio_path} {neobio_run} | tail -2").read()
     out = o.split('\n')
-    s_len = len(out[0])
-    score = int(out[1].split(' ')[-1])
-    if score/s_len >=0.8 1:
-        os.system(f"touch out/{f1}_{f2}")
+    seq = len(out[0].replace("-",""))
+    aln = out[1].count("|")
+    seq2 = len(out[2].replace("-",""))
+    seq_len = max(seq, seq2)
+    sim = aln/seq_len
+    # print(f1, f2, sim)
+    if sim >= 0.8:
+        os.system(f"touch exp2_2/{f1}_{f2}-sim_{sim:.2f}.txt")
 
 if __name__ == "__main__":
     # for f1 in os.listdir(P):
