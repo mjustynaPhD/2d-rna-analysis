@@ -24,7 +24,13 @@ NAMES = {
 
 
 def get_pdb_ids(path):
-    pdbs = os.listdir(path)
+    # if path is directory then list dir. else read file
+    if os.path.isdir(path):
+        pdbs = os.listdir(path)
+    else:
+        with open(path) as f:
+            pdbs = f.readlines()
+        pdbs = [p.strip() for p in pdbs]
     pdbs = [p.replace("-", "_") for p in pdbs]
     pdbs = [f'{p[:4].upper()}{p[4:]}' for p in pdbs]
     pdbs = [f'{p.split("_")[0]}_{p.split("_")[2]}' for p in pdbs]
