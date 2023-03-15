@@ -15,7 +15,7 @@ def compare(f1, f2):
     out = o.split('\n')
     s_len = len(out[0])
     score = int(out[1].split(' ')[-1])
-    if score/s_len == 1:
+    if score/s_len >=0.8 1:
         os.system(f"touch out/{f1}_{f2}")
 
 if __name__ == "__main__":
