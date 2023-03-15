@@ -11,6 +11,12 @@ notes.md
 external-files/
 .coverage
 
+# data
+*.fa
+*.fasta
+*.sto
+*.pdb
+
 
 # Node artifact files
 node_modules/
