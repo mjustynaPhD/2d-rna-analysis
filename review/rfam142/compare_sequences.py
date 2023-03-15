@@ -11,7 +11,7 @@ neobio_path = "/home/mjustyna/software/bin/"
 def compare(f1, f2):
     neobio_run = f"neobio.textui.NeoBio NW {P}/{f1} {O}/{f2}"
     print(f1, f2)
-    o = os.popen(f"java -cp {neobio_path} {neobio_run} | tail -2").read()
+    o = os.popen(f"java -cp {neobio_path} {neobio_run} | tail -4").read()
     out = o.split('\n')
     seq = len(out[0].replace("-",""))
     aln = out[1].count("|")
