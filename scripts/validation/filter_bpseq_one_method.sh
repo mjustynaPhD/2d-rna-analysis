@@ -3,7 +3,7 @@
 PREDS="/data/2d-rna/new-cifs/predictions-bpseqs/"
 TARGETS="/data/2d-rna/new-cifs/validation-pseudoknots"
 OUTPUT="/data/2d-rna/new-cifs/validation-pseudoknots"
-method="spot-rna2"
+method="spot-rna"
 
 for id in $PREDS/*;
 do
