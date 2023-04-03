@@ -6,14 +6,14 @@ import pandas as pd
 DIRS = ('bgsu', 'rfam', 'novel')
 
 ORDER = [
-    'Contextfold',
-    'CONTRAfold',
-    'MXfold',
     'E2efold',
     'MXfold2',
     'RNA-state-inf',
     'SPOT-RNA',
     'UFold',
+    'Contextfold',
+    'CONTRAfold',
+    'MXfold',
     'IPknot',
     'RNAFold',
     'RNAStructure'   
@@ -39,11 +39,10 @@ def read_values(means: str, stds: str):
     with open(stds) as f:
         s = f.readlines()
     vals = {}
-
     for a, b in zip(m[1:], s[1:]):
         a_s = a.strip().split(",")
         b_s = b.strip().split(",")
-        join = ["%s (%s)" % (x, y) for x, y in zip(a_s[1:], b_s[1:])]
+        join = ["%s$\pm$%s" % (x, y) for x, y in zip(a_s[1:], b_s[1:])]
         # print(a_s[0], ",".join(join), sep=',')
         vals[a_s[0]] = join[-1]
     return vals
@@ -52,7 +51,7 @@ def read_values(means: str, stds: str):
 if __name__ == "__main__":
     parser = parse_args()
     if parser.type == 'std':
-        TYPES = ('all', 'canon')
+        TYPES = ('all', 'canon', 'stack')
     elif parser.type == 'long':
         TYPES = ('noncanon', 'pseudo')
     else:

@@ -11,10 +11,8 @@ def get_sns_data(dfs, df_means, names:dict, order:list = None, colors_dict:dict 
         mcc_df = pd.DataFrame(dfs[m]['INF'])
         mcc_df.rename(columns={"INF": m}, inplace=True)
         mcc_dfs[m] = mcc_df
-
     all_dfs = list(mcc_dfs.values())
     x = all_dfs[0].join(all_dfs[1:])
-
     m = []
     inf = []
     means:List[float] = []

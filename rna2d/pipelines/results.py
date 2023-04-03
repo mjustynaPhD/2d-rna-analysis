@@ -11,11 +11,14 @@ from rna2d.utils import (get_results, get_subset_ids,
 @dataclass
 class Results():
     results_path: str
+    ignored_methods: List[str] = None
 
     def run_for_all(self) -> Tuple[Dict[str, List[float]],
                                    Dict[str, List[str]]]:
         res = get_results(res_path=self.results_path)
-        ids = get_subset_ids(res)
+        if self.ignored_methods is None:
+            self.ignored_methods = []
+        ids = get_subset_ids(res, ignored_methods=self.ignored_methods)
         common = filter_common(ids)
         methods_results, indeces = collect_results(res, common, ids)
         return methods_results, indeces
