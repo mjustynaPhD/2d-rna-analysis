@@ -7,6 +7,7 @@ from .utils import get_means_stds
 from .utils import get_DataFrames
 from .utils import get_names
 from .utils import get_pdb_ids
+from .utils import download_pdbs
 
 from .data_transformations import get_sns_data
 

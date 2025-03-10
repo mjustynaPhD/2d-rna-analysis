@@ -2,6 +2,8 @@ import os
 from typing import Any, Dict, List, Tuple
 import pandas as pd
 
+from Bio.PDB import PDBList
+
 NAMES = {
     'spot-rna': 'SPOT-RNA',
     'mxfold2': 'MXfold2',
@@ -16,6 +18,11 @@ NAMES = {
     'e2efold': 'E2efold'
     }
 
+def download_pdbs(pdb_ids: List[str], out_path: str):
+    # download pdb using bio-pdb
+    pdbl = PDBList()
+    for pdb_id in pdb_ids:
+        pdbl.retrieve_pdb_file(pdb_id, pdir=out_path, file_format="pdb")
 
 def get_pdb_ids(path):
     pdbs = os.listdir(path)
