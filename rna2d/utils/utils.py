@@ -1,5 +1,7 @@
 import os
 from typing import Any, Dict, List, Tuple
+
+import numpy as np
 import pandas as pd
 
 from Bio.PDB import PDBList
@@ -7,15 +9,19 @@ from Bio.PDB import PDBList
 NAMES = {
     'spot-rna': 'SPOT-RNA',
     'mxfold2': 'MXfold2',
+    'spot-rna2': "SPOT-RNA2",
     'ufold': 'UFold',
     'contextFold': 'Contextfold',
     'ipknot': 'IPknot',
     'contrafold': 'CONTRAfold',
     'rnafold': 'RNAFold',
     'mxfold': 'MXfold',
-    'rna-state-inf': 'RNA State Inf.',
+    'rna-state-inf': 'RNA-state-inf',
     'rna-structure': 'RNAStructure',
-    'e2efold': 'E2efold'
+    'e2efold': 'E2efold',
+    'rnaalifold': 'RNAalifold',
+    'rscape': 'R-scape',
+    'turbofold': 'TurboFold II',
     }
 
 def download_pdbs(pdb_ids: List[str], out_path: str):
@@ -25,7 +31,13 @@ def download_pdbs(pdb_ids: List[str], out_path: str):
         pdbl.retrieve_pdb_file(pdb_id, pdir=out_path, file_format="pdb")
 
 def get_pdb_ids(path):
-    pdbs = os.listdir(path)
+    # if path is directory then list dir. else read file
+    if os.path.isdir(path):
+        pdbs = os.listdir(path)
+    else:
+        with open(path) as f:
+            pdbs = f.readlines()
+        pdbs = [p.strip() for p in pdbs]
     pdbs = [p.replace("-", "_") for p in pdbs]
     pdbs = [f'{p[:4].upper()}{p[4:]}' for p in pdbs]
     pdbs = [f'{p.split("_")[0]}_{p.split("_")[2]}' for p in pdbs]
@@ -42,7 +54,7 @@ def get_results(res_path):
     return results
 
 
-def get_subset_ids(results):
+def get_subset_ids(results, ignored_methods: list = []):
     subset_ids = {}
     k = ""
     counter = 0
@@ -56,9 +68,11 @@ def get_subset_ids(results):
             method = l[0]
             res = l[1:]
             res = [float(r) for r in res]
-            if method not in subset_ids:
+            if method not in subset_ids and method not in ignored_methods:
                 subset_ids[method] = []
-            subset_ids[method].append(k)
+            elif method not in ignored_methods:
+                subset_ids[method].append(k)
+
         counter += 1
     return subset_ids
 
@@ -154,12 +168,47 @@ def get_DataFrames(
     cols: List[str] = ['PPV', 'TPR', 'F1', 'INF']
 ) -> Tuple[pd.DataFrame, pd.DataFrame]:
     df_means = pd.DataFrame(means.values(), columns=cols, index=means.keys())
-    df_means = df_means.sort_values("INF", ascending=False)
 
     df_std = pd.DataFrame(stds.values(), columns=cols, index=df_means.index)
-    # df_std = df_std.sort_values(df_means['INF-MCC'], ascending=False)
     if out_path is not None:
         os.makedirs(out_path, exist_ok=True)
         df_means.to_csv(os.path.join(out_path, name+"-means.csv"))
         df_std.to_csv(os.path.join(out_path, name+"-stds.csv"))
     return df_means, df_std
+
+
+def get_single_representative(
+        all_indeces:list,
+        pk_indeces:list,
+        novel_keys:list,
+        mapping:dict,
+        seed:int=0
+    ) -> list:
+    """Generate a single random representative for each family.
+
+    Args:
+        all_indeces (list): List of PDB ids for type all.
+        pk_indeces (list): List of PDB ids for type pseudoknot.
+        novel_keys (list): List of novel families ids.
+        mapping (dict): Mapping of PDB ids to family ids.
+        seed (int, optional): Seed for random state. Defaults to 0.
+
+    Returns:
+        list: list of PDB ids considered as representatives.
+    """
+    np.random.seed(seed)
+    l = {}
+    np.random.shuffle(sorted(pk_indeces))
+    for i in pk_indeces:
+        v =  mapping.get(i, 0)
+        if v not in l and i in novel_keys:
+            l[v] = i
+
+    np.random.shuffle(sorted(all_indeces))
+    for i in all_indeces:
+        v =  mapping.get(i, 0)
+        
+        if v not in l and i in novel_keys:
+            l[v] = i
+    return list(l.values())
+    # return l

@@ -37,14 +37,14 @@ or `./pipeline.sh` <br>
 `mkdir predictions-bpseqs` <br>
 
 #### Convert from *.out to dotbrackets (mxfold, mxfold2, contextfold)
-`/data/2d-rna/scripts/convert_dotbracket.sh ~/2d-prediction/mxfold2` <br>
+`preds-to-bpseq/convert_dotbracket.sh ~/2d-prediction/mxfold2` <br>
 
 
 #### Create bpseqs from all.csv and noncanonical.csv
 `./make_bpseq_with_structure.sh` <br>
 
 #### Copy canonical targets
-`./copy_canonical_targets.sh` <br>
+`validation/copy_canonical_targets.sh` <br>
 
 #### Filter predicted bpseqs with targets
 `./filter_bpseq.sh`
@@ -54,6 +54,7 @@ or `./pipeline.sh` <br>
 `java -jar rna2dValidator-1.0-SNAPSHOT-jar-with-dependencies.jar /data/2d-rna/validation-canon/` <br>
 `java -jar rna2dValidator-1.0-SNAPSHOT-jar-with-dependencies.jar /data/2d-rna/validation-noncanon/` <br>
 `java -jar rna2dValidator-1.0-SNAPSHOT-jar-with-dependencies.jar /data/2d-rna/validation-pseudoknots/` <br>
+`java -jar rna2dValidator-1.0-SNAPSHOT-jar-with-dependencies.jar /data/2d-rna/new-cifs/validation-stack/` <br>
 
 
 

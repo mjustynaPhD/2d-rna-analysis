@@ -8,6 +8,7 @@ from .utils import get_DataFrames
 from .utils import get_names
 from .utils import get_pdb_ids
 from .utils import download_pdbs
+from .utils import get_single_representative
 
 from .data_transformations import get_sns_data
 
